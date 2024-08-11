@@ -1,0 +1,1 @@
+title=saeed,year=1989,price=12000,isbn=25000,pages=saeed,dec=hi pridetitle=bachloere,year=1950,price=12500,isbn=55000,pages=bachloere,dec=fe	
