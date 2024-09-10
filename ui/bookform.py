@@ -23,7 +23,6 @@ class BookForm(tk.Tk):
         for row_book in self.__book_grid.get_children():
             self.__book_grid.delete(row_book)
         book:Book
-        print(self._book_bl.get_list())
         for book in self._book_bl.get_list():
                 self.__book_grid.insert("","end",values=(book.title,book.year,book.price,book.isbn,book.pages,book.dec,))
                 
@@ -134,16 +133,17 @@ class BookForm(tk.Tk):
         selected_books:Book|list[Book]=self.__selcet_row()
         if not selected_books:
             messagebox.showerror("Error",'you dont select item')
-        if len(selected_books)!=1:
+        elif len(selected_books)!=1:
             messagebox.showerror("Error",'you must select just one item')
-        selected_book=selected_books[0]
-        self.withdraw()
-        self._base_form=BaseForm(book_bl=self._book_bl,actionform=FormAction.EDIT,instance=selected_book)
-        self._base_form.mainloop()
-        self.deiconify()
-        # if self._base_form.form_result==FormResault.SAVE:
-        self._refresh_book()
-        
+        else:
+            selected_book=selected_books[0]
+            self.withdraw()
+            self._base_form=BaseForm(book_bl=self._book_bl,actionform=FormAction.EDIT,instance=selected_book)
+            self._base_form.mainloop()
+            self.deiconify()
+            # if self._base_form.form_result==FormResault.SAVE:
+            self._refresh_book()
+            
 
 
 
@@ -154,6 +154,7 @@ class BookForm(tk.Tk):
         self.withdraw()
         self._base_form=BaseForm(book_bl=self._book_bl,actionform=None)
         self._base_form.mainloop()
+        self._refresh_book()
         self.deiconify()
         # if self._base_form.form_result==FormResault.SAVE:
         self._refresh_book()

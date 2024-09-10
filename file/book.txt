@@ -6,3 +6,5 @@
 {'title': 'sator', 'year': '1400', 'price': '120000', 'isbn': '4564', 'pages': '5200', 'dec': ''}
 {'title': 'thor', 'year': '1002', 'price': '2500', 'isbn': '15616', 'pages': '128', 'dec': 'good'}
 {'title': 'black', 'year': '1989', 'price': '2000', 'isbn': '45435', 'pages': '342', 'dec': 'gff'}
+{'title': 'samir', 'year': '1499', 'price': '1200', 'isbn': '121', 'pages': '5', 'dec': 'sdj\t'}
+{'title': 'sarem', 'year': '1200', 'price': '15', 'isbn': 'dssd', 'pages': '123', 'dec': '126\t'}
