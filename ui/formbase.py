@@ -3,16 +3,17 @@ from tkinter import messagebox
 
 from bl.base.base import BookBl
 from common.book import Book
-from common.status import FormAction, Status
+from common.status import FormAction, Status,FormResault
 
 
-class BaseForm(tk.Tk):
-    def __init__(self,book_bl:Book,actionform:FormAction) -> None:
+class BaseForm(tk.Toplevel):
+    def __init__(self,book_bl:BookBl,actionform:FormAction) -> None: # type: ignore
         super().__init__()
+       
         self._book_bl=book_bl
         self._actionform=actionform
         self._initial()
-
+        self._formresult=FormResault.BACK
     def _initial(self):
         self.title("main form")
         self.geometry("600x600")
@@ -155,6 +156,8 @@ class BaseForm(tk.Tk):
         #endregion
 
     def _back_btn_click(self):
+        
+        self.quit()
         self.destroy()
     
     def __validition(self):
@@ -177,6 +180,7 @@ class BaseForm(tk.Tk):
 
 
     def _save_btn_click(self):
+        self._formresult=FormResault.SAVE
         res=self.__validition()
         if  not res==[]:
             messagebox.showerror("ERROR",res)
@@ -195,7 +199,9 @@ class BaseForm(tk.Tk):
                 messagebox.showinfo("Success","great :)")
             else:
                 messagebox.showerror("Error",res[1])
-
+    @property
+    def form_result(self):
+        return self._formresult
             
 
 class BookForm(BaseForm):

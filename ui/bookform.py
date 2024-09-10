@@ -12,7 +12,6 @@ class BookForm(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self._book_bl=BookBl()
-        self._base_form=BaseForm()
         self._initial()
         self._on_show()
     
@@ -27,8 +26,8 @@ class BookForm(tk.Tk):
         print(self._book_bl.get_list())
         res=self._book_bl.get_list()
         for book in self._book_bl.get_list():
-                self.__book_grid.insert("","end",values=(book.title,book.year,book.price,book.isbn,book.pages,book.dec,))
-     
+                # self.__book_grid.insert("","end",values=(book.title,book.year,book.price,book.isbn,book.pages,book.dec,))
+            pass
 
 
 
@@ -133,4 +132,5 @@ class BookForm(tk.Tk):
         pass
 
     def _add_btn_click(self):
-        self._base_form()
+        self._base_form=BaseForm(book_bl=None,actionform=None)
+        self._base_form.mainloop()
