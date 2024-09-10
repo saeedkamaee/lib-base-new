@@ -4,7 +4,7 @@ from tkinter.ttk import Scrollbar, Treeview
 
 from bl.base.base import BookBl
 from common.book import Book
-from common.status import Status
+from common.status import Status,FormResault,FormAction
 from ui.formbase import BaseForm
 
 
@@ -24,11 +24,16 @@ class BookForm(tk.Tk):
             self.__book_grid.delete(row_book)
         book:Book
         print(self._book_bl.get_list())
-        res=self._book_bl.get_list()
         for book in self._book_bl.get_list():
-                # self.__book_grid.insert("","end",values=(book.title,book.year,book.price,book.isbn,book.pages,book.dec,))
-            pass
-
+                self.__book_grid.insert("","end",values=(book.title,book.year,book.price,book.isbn,book.pages,book.dec,))
+                
+    def __selcet_row(self):
+        select_rows=self.__book_grid.selection()
+        select_book:list[Book]=[]
+        for row_id in select_rows:
+            row_data=self.__book_grid.item(item=row_id,option="values")
+            select_book.append(Book(title=row_data[0],year=row_data[1],price=row_data[2],isbn=row_data[3],pages=row_data[4],dec=row_data[5]))
+        return select_book
 
 
     def _initial(self):
@@ -126,11 +131,30 @@ class BookForm(tk.Tk):
     
 
     def _edit_btn_click(self):
-        pass
+        selected_books:Book|list[Book]=self.__selcet_row()
+        if not selected_books:
+            messagebox.showerror("Error",'you dont select item')
+        if len(selected_books)!=1:
+            messagebox.showerror("Error",'you must select just one item')
+        selected_book=selected_books[0]
+        self.withdraw()
+        self._base_form=BaseForm(book_bl=self._book_bl,actionform=FormAction.EDIT,instance=selected_book)
+        self._base_form.mainloop()
+        self.deiconify()
+        # if self._base_form.form_result==FormResault.SAVE:
+        self._refresh_book()
+        
+
+
 
     def _remove_btn_click(self):
         pass
 
     def _add_btn_click(self):
-        self._base_form=BaseForm(book_bl=None,actionform=None)
+        self.withdraw()
+        self._base_form=BaseForm(book_bl=self._book_bl,actionform=None)
         self._base_form.mainloop()
+        self.deiconify()
+        # if self._base_form.form_result==FormResault.SAVE:
+        self._refresh_book()
+        

@@ -3,11 +3,11 @@ from tkinter import messagebox
 
 from bl.base.base import BookBl
 from common.book import Book
-from common.status import FormAction, Status,FormResault
+from common.status import FormAction,FormResault
 
 
 class BaseForm(tk.Toplevel):
-    def __init__(self,book_bl:BookBl,actionform:FormAction) -> None: # type: ignore
+    def __init__(self,book_bl:BookBl,actionform:FormAction,instance:Book|None=None) -> None: # type: ignore
         super().__init__()
        
         self._book_bl=book_bl
@@ -180,54 +180,28 @@ class BaseForm(tk.Toplevel):
 
 
     def _save_btn_click(self):
-        self._formresult=FormResault.SAVE
         res=self.__validition()
         if  not res==[]:
             messagebox.showerror("ERROR",res)
         else:
             inst_book=Book(title=self._title_entry.get(),
                            year=self._year_entry.get(),
-                           price=self._pages_entry.get(),
+                           price=self._price_entry.get(),
                            isbn=self._isbn_entry.get(),                          
-                           pages=self._title_entry.get(),
+                           pages=self._pages_entry.get(),
                            dec=self._dec_entry.get("1.0", "end-1c")
                                            
                           )
-            print(inst_book)
+           
             res=self._book_bl.creat(inst_book)
-            if res[0]==Status.SUCESS:
+            if res.sucess:
                 messagebox.showinfo("Success","great :)")
+                self._formresult=FormResault.SAVE
+                self.quit()
+                self.destroy()
             else:
-                messagebox.showerror("Error",res[1])
+                messagebox.showerror("Error",res.err_mesage)
     @property
     def form_result(self):
         return self._formresult
             
-
-class BookForm(BaseForm):
-    def __init__(self):
-        super().__init__()
-        self._initial()
-    
-    def _initial(self):
-        super()._initial()
-        self.title("Book form")
-
-        #region headerframe
-        self._header=tk.Frame(master=self,height=50,bg="green")
-        self._header.pack(side=tk.TOP,fill=tk.X)
-        self._header.propagate(False)
-        #endregion
-
-        #region footerframe
-        self._footer=tk.Frame(master=self,height=50,bg="blue")
-        self._footer.pack(side=tk.BOTTOM,fill=tk.X)
-        self._footer.propagate(False)
-        #endregion
-        
-        #region body
-        self._body=tk.Frame(master=self,bg="red",height=300)
-        self._body.pack(fill=tk.BOTH)
-        self._body.propagate(False)
-        #endregion
-        

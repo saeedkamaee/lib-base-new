@@ -1,1 +1,8 @@
-title=saeed,year=1989,price=12000,isbn=25000,pages=saeed,dec=hi pridetitle=bachloere,year=1950,price=12500,isbn=55000,pages=bachloere,dec=fe	
+{'title': 'saeed', 'year': '1989', 'price': '1250000000000', 'isbn': '12500', 'pages': '14410', 'dec': 'good'}
+{'title': 'arsam', 'year': '1408', 'price': '99900000000', 'isbn': '132', 'pages': '5', 'dec': 'baby'}
+{'title': 'safir', 'year': '1989', 'price': '200000', 'isbn': '1561', 'pages': '205', 'dec': ''}
+{'title': 'soursh', 'year': '19800', 'price': '12000', 'isbn': '1321', 'pages': '125', 'dec': ''}
+{'title': 'safar', 'year': '14004', 'price': '1561', 'isbn': '165165', 'pages': '11254', 'dec': ''}
+{'title': 'sator', 'year': '1400', 'price': '120000', 'isbn': '4564', 'pages': '5200', 'dec': ''}
+{'title': 'thor', 'year': '1002', 'price': '2500', 'isbn': '15616', 'pages': '128', 'dec': 'good'}
+{'title': 'black', 'year': '1989', 'price': '2000', 'isbn': '45435', 'pages': '342', 'dec': 'gff'}
